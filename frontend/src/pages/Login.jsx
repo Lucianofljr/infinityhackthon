@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import InfinityLogoMobile from "@/assets/InfinitySchoolLogoMobile.png";
-import InfinityLogoDesktop from "@/assets/InfinitySchoolLogoDesktop.png";
+// import InfinityLogoMobile from "@/assets/logo/InfinityLogoMobile.png";
+// import InfinityLogoDesktop from "@/assets/logo/InfinityLogoDesktop.png"; 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 

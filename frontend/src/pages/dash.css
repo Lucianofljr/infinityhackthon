@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  overflow: hidden;
+  background-color: rgba(0 0 0/ 0.9);
+}
+/* section {
+  background-image: url(./image/2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 80%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+} */
+section {
+  position: relative;
+  background: none;
+  width: 80%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+ section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(./image/2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  transition: background-position 0.6s ease;
+  z-index: 0;
+} 
+
+/* conteúdo da section sobre o background */
+section > * {
+  position: relative;
+  z-index: 1;
+}  
+
+
+
+
+.image-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.dash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  height: 100vh;
+}
+
+/* botao neon */
+#info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 90%;
+  height: 30vh;
+  margin-top: 200px;
+  gap: 50px;
+
+  a {
+    font-family: "consolas";
+    position: relative;
+    display: inline-block;
+    padding: 15px;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    font-size: 24px;
+    overflow: hidden;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  a:hover {
+    color: #000000;
+    background: red;
+    text-shadow: 0 0 10px #f32121, 0 0 40px #ff0000, 0 0 80px #ff0000;
+    box-shadow: 0 0 10px #ff0000, 0 0 40px #ff0000, 0 0 80px #ff0000;
+    transition-delay: 0.8s;
+  }
+
+  a span {
+    position: absolute;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff0000);
+  }
+
+  a:hover span:nth-child(1) {
+    left: 100%;
+    transition: 0.5s;
+  }
+
+  a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #fc0000);
+  }
+
+  a:hover span:nth-child(3) {
+    right: 100%;
+    transition: 0.5s;
+    transition-delay: 0.4s;
+  }
+
+  a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #ff0000);
+  }
+
+  a:hover span:nth-child(2) {
+    top: 100%;
+    transition: 0.5s;
+    transition-delay: 0.16s;
+  }
+
+  a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #ff0000);
+  }
+
+  a:hover span:nth-child(4) {
+    bottom: 100%;
+    transition: 0.5s;
+    transition-delay: 0.6s;
+  }
+}
+
+#dark-mode {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  position: absolute;
+  width: 100px;
+  height: 45px;
+  border-radius: 50px;
+  top: 50px;
+  right: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo base para os DOIS ícones */
+#dark-mode i {
+  color: aliceblue;
+  background-color: #ff0000;
+  padding: 10px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* ESTADO INICIAL (MODO CLARO)  */
+
+/* #icon é o sol */
+#icon {
+  opacity: 1;
+  transform: translateX(-12px) scale(1);
+}
+
+/* #icon2 é a lua */
+#icon2 {
+  opacity: 0;
+  transform: translateX(0px) scale(0);
+}
+
+/* DARK MODE */
+
+body.dark-mode {
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
+}
+
+/* Seletor correto para a section */
+body.dark-mode section::after {
+  content: "";
+  background-image: url(./image/1.jpg);
+}
+
+/* MUDANÇAS NOS ÍCONES QUANDO O MODO ESCURO ESTÁ ATIVO */
+body.dark-mode #icon {
+  opacity: 0; /* Sol some */
+  transform: translateX(55px) scale(0); /* Move para a direita e desaparece */
+}
+
+body.dark-mode #icon2 {
+  opacity: 1; /* Lua aparece */
+  transform: translateX(40px) scale(1); /* Move para a direita e aparece */
+}
+
+body.dark-mode a {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-style: italic;
+  transition: all 0.2s ease;
+}
+
+/* RESPONSIVIDADE */
+
+/* CELULARES PEQUENOS */
+@media (max-width: 480px) {
+  section {
+    width: 95%;
+    height: auto;
+    padding: 20px 10px;
+    border-radius: 20px;
+    flex-direction: column;
+  }
+
+
+  #info {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 20px;
+
+  }
+
+  a {
+    font-size: 18px !important;
+  }
+
+  #dark-mode {
+    width: 70px;
+    height: 35px;
+    padding: 10px;
+    top: 10px;
+    right: 10px;
+  }
+
+  #dark-mode i {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+  }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+  section {
+    width: 90%;
+    height: 85vh;
+    border-radius: 30px;
+  }
+  #dark-mode {
+    top: 65px;
+  }
+  #info {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  a {
+    font-size: 20px !important;
+  }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1024px) {
+  section {
+    width: 90%;
+    height: 90vh;
+  }
+
+  #info {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 150px;
+    gap: 40px;
+  }
+
+  a {
+    font-size: 22px !important;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1025px) {
+  section {
+    width: 80%;
+    height: 90vh;
+  }
+
+  #info {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 200px;
+    gap: 50px;
+  }
+
+  a {
+    font-size: 24px !important;
+  }
+}
