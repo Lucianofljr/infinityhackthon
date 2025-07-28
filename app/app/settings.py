@@ -6,6 +6,7 @@ import os
 load_dotenv()
 
 SECRET_KEY_GOOGLE = os.getenv("SECRET_KEY_GOOGLE")
+
 ID_CLIENT_GOOGLE = os.getenv("ID_CLIENT_GOOGLE")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
