@@ -1,90 +1,120 @@
-"use client";
+function LoginPage({ onLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { isDark, toggleTheme } = useTheme();
 
-import { Button } from "@/components/ui/button";
-// import InfinityLogoMobile from "@/assets/logo/InfinityLogoMobile.png";
-// import InfinityLogoDesktop from "@/assets/logo/InfinityLogoDesktop.png"; 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+    if (!email || !password) {
+      setError('Email e senha são obrigatórios');
+      setIsLoading(false);
+      return;
+    }
 
-import CpfInput from "@/components/CpfInput";
+    try {
+      const result = await mockAuth.login({ email, password });
+      if (result.success) {
+        onLogin(result.user, result.token);
+      } else {
+        setError(result.error);
+      }
+    } catch (err) {
+      setError('Erro ao fazer login');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-import * as React from "react";
-
-function Login() {
-  const [isopen, setIsOpen] = React.useState(false);
-  const [date, setDate] = (React.useState < Date) | (undefined > undefined);
+  const themeClasses = isDark 
+    ? 'bg-gray-900 text-white' 
+    : 'bg-gradient-to-br from-purple-50 to-blue-50';
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-[#101010] text-white gap-4">
-      <header>
-        <img src={InfinityLogoMobile} alt="" />
-      </header>
+    <div className={`min-h-screen flex items-center justify-center p-4 ${themeClasses}`}>
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={toggleTheme}
+          className="rounded-full"
+        >
+          {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </Button>
+      </div>
 
-      <main className="flex flex-col items-center justify-center gap-4 xl:w-[600px] lg:w-1/2 md:w-[70%] rounded border-2 border-[#3F3F3F] p-8 sm:w-[80%]">
-        <div id="header-form" className="flex flex-col gap-3 text-center">
-          <h1 id="main-header" className="text-5xl ">
-            Login Now
-          </h1>
-          <h3 id="sub-header" className="text-1xl opacity-35">
-            Please enter your details
-          </h3>
-        </div>
-
-        <form className="flex flex-col items- justify-center gap-4 w-full">
-          {/* CPF */}
-          <CpfInput />
-
-          {/* Date of Birth */}
-          <div id="date-input" className="flex flex-col gap-4">
-            <Label forHTML="date" className="font-bold">
-              Date of Birth:
-            </Label>
-
-            <Popover open={isopen} onOpenChange={setIsOpen}>
-
-              <PopoverTrigger asChild>
-                <Button variant="outline" id="date">
-                  {date ? date.toLocaleDateString() : "Select Date of Birth "}
-                  <ChevronDownIcon />
-                </Button>
-              </PopoverTrigger>
-
-              <PopoverContent>
-                <Calendar
-                  mode="single"
-                  captionLayout="dropdown"
-                  selected={date}
-                  onSelect={(date) => {
-                    setDate(date);
-                    setIsOpen(false);
-                  }}
-                />
-              </PopoverContent>
-            </Popover>
+      <Card className={`w-full max-w-md ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white'}`}>
+        <CardHeader className="text-center space-y-4">
+          {/* Infinity School Logo */}
+          <div className="mx-auto w-20 h-20 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-2xl">∞</span>
           </div>
-
-          {/* Remember me */}
-          <section className="flex justify-between">
-            <div id="remember" className="flex gap-1">
-              <Input type="checkbox" id="checkbox" />
-              <Label forHTML="checkbox">Remember me</Label>
+          <div>
+            <CardTitle className="text-3xl bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              Infinity School
+            </CardTitle>
+            <CardDescription className={isDark ? 'text-gray-400' : 'text-gray-600'}>
+              Sistema de Produtividade
+            </CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <Label className="font-medium">Email:</Label>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu@infinityschool.com.br"
+                className="mt-2"
+                required
+              />
             </div>
 
-            <p>Forgot Password?</p>
-          </section>
+            <div>
+              <Label className="font-medium">Senha:</Label>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Digite sua senha"
+                className="mt-2"
+                required
+              />
+            </div>
 
-          <Button type="submit">Login</Button>
-        </form>
-      </main>
+            <div className="flex items-center justify-between">
+              <label className="flex items-center space-x-2">
+                <input type="checkbox" className="rounded" />
+                <span className="text-sm">Lembrar-me</span>
+              </label>
+              <button className="text-sm text-purple-600 hover:text-purple-700">
+                Esqueci a senha
+              </button>
+            </div>
+
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
+
+            <Button 
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+              disabled={isLoading}
+              onClick={handleSubmit}
+            >
+              {isLoading ? 'Entrando...' : 'Entrar'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
 
-export default Login;
+export default LoginPage

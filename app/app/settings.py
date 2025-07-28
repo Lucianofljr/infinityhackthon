@@ -5,6 +5,9 @@ import os
 
 load_dotenv()
 
+SECRET_KEY_GOOGLE = os.getenv("SECRET_KEY_GOOGLE")
+ID_CLIENT_GOOGLE = os.getenv("ID_CLIENT_GOOGLE")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -135,3 +138,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+GOOGLE_CLIENT_ID = ID_CLIENT_GOOGLE
+GOOGLE_CLIENT_SECRET = SECRET_KEY_GOOGLE
+GOOGLE_REDIRECT_URI = 'http://localhost:8000/api/google-oauth-callback/' # Ou o seu domínio de produção
+GOOGLE_SCOPES = ['https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/calendar.readonly']

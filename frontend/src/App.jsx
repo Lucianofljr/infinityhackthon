@@ -4,6 +4,8 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
+import ProfilePage from "./pages/profilePage"
+import MainApp from "./pages/main"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 function Logout() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/logout" element={ <Logout /> }/>
         <Route path="/register" element={ <RegisterAndLogout /> }/>
         <Route path="*" element={ <NotFound /> }/>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/main" element={<MainApp />} />
       </Routes>
     </BrowserRouter>
   )
